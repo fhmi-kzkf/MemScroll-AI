@@ -47,3 +47,12 @@ Thumbs.db
 
 # Test artifacts
 backend/test_*.py
+
+# Planning & Design Documents
+/reference/
+AppFlow.md
+DESIGN.md
+PRD.md
+TRD.md
+schema.prisma
+
