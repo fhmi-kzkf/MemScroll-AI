@@ -83,5 +83,35 @@ When a paper is uploaded, it goes through a 4-stage pipeline:
 3. **Embed**: Concepts are embedded into vector representations for the memory graph.
 4. **Generate**: The LLM writes HTML-based "Scrollytelling" sections complete with visual data representations (SVG/CSS charts).
 
+### System Architecture Diagram
+
+```mermaid
+graph TD
+    A[Frontend: Next.js] -->|HTTP REST API| B[Backend: FastAPI]
+    B <-->|Store/Retrieve Data| D[(SQLite Database)]
+    
+    subgraph Data Pipeline
+    C[PyMuPDF] -->|Extract Text| B
+    end
+    
+    subgraph Alibaba Cloud Services
+    E((DashScope APIs))
+    end
+    
+    B -->|Qwen 3.6-Flash API| E
+    B -->|Text-Embedding-v4 API| E
+    E -->|JSON Extraction & Scrollytelling HTML| B
+    
+    style E fill:#ff6a00,stroke:#d35400,stroke-width:2px,color:#fff
+```
+
+## Proof of Alibaba Cloud Usage
+
+MemscrollAI leverages **Alibaba Cloud's DashScope API** to power its core intelligence, specifically utilizing the `qwen3.6-flash`, `qwen3.7-plus`, and `text-embedding-v4` models.
+
+You can verify the integration in the source code here:
+- [`backend/pipeline.py`](https://github.com/fhmi-kzkf/MemScroll-AI/blob/main/backend/pipeline.py) - See functions `extract_concepts()`, `embed_concept()`, and `generate_scrollytelling()` which make direct HTTP calls to `https://dashscope-intl.aliyuncs.com`.
+- [`backend/main.py`](https://github.com/fhmi-kzkf/MemScroll-AI/blob/main/backend/main.py) - See the API routes configured to securely handle Qwen API interactions.
+
 ## License
 MIT License. See `LICENSE` for more information.
