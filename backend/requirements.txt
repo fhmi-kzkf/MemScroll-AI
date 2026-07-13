@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+prisma
+celery
+redis
+pymupdf
+pydantic
+python-dotenv
