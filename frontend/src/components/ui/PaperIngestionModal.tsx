@@ -6,12 +6,12 @@ import { useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { API_BASE_URL } from "@/lib/api";
 
-export default function PaperIngestionModal({ 
-  isOpen, 
+export default function PaperIngestionModal({
+  isOpen,
   onClose,
-  onAdd 
-}: { 
-  isOpen: boolean; 
+  onAdd
+}: {
+  isOpen: boolean;
   onClose: () => void;
   onAdd: (title: string, method: string) => void;
 }) {
@@ -61,7 +61,7 @@ export default function PaperIngestionModal({
 
   const removeFile = (name: string) => {
     setFiles(prev => prev.filter(f => f.name !== name));
-    setUploadProgress(prev => { const next = {...prev}; delete next[name]; return next; });
+    setUploadProgress(prev => { const next = { ...prev }; delete next[name]; return next; });
   };
 
   const handleSearchAdd = () => {
@@ -80,8 +80,8 @@ export default function PaperIngestionModal({
     files.forEach(f => initialProgress[f.name] = "pending");
     setUploadProgress(initialProgress);
 
-    // Upload all files concurrently
-    const uploads = files.map(async (file) => {
+    // Upload files sequentially to prevent SQLite database locks
+    for (const file of files) {
       try {
         const formData = new FormData();
         formData.append("file", file);
@@ -101,9 +101,7 @@ export default function PaperIngestionModal({
       } catch {
         setUploadProgress(prev => ({ ...prev, [file.name]: "error" }));
       }
-    });
-
-    await Promise.all(uploads);
+    }
     setIsUploading(false);
     setFiles([]);
     setUploadProgress({});
@@ -143,16 +141,16 @@ export default function PaperIngestionModal({
                 <X size={20} strokeWidth={1.5} />
               </button>
               <h3 className="text-[34px] font-light mb-6 tracking-[-0.02em]">Add Literature</h3>
-              
+
               {/* Tabs */}
               <div className="flex gap-8 border-b border-ash">
-                <button 
+                <button
                   onClick={() => setMethod("search")}
                   className={`pb-2 text-[14px] uppercase tracking-normal transition-colors border-b-2 ${method === "search" ? "border-ink-black text-ink-black" : "border-transparent text-graphite hover:text-ink-black"}`}
                 >
                   API Search
                 </button>
-                <button 
+                <button
                   onClick={() => setMethod("upload")}
                   className={`pb-2 text-[14px] uppercase tracking-normal transition-colors border-b-2 ${method === "upload" ? "border-ink-black text-ink-black" : "border-transparent text-graphite hover:text-ink-black"}`}
                 >
@@ -171,12 +169,12 @@ export default function PaperIngestionModal({
                   <p className="text-[14px] text-graphite mb-4">Search Semantic Scholar by Title, DOI, or Keyword.</p>
                   <div className="relative">
                     <Search className="absolute left-0 top-1/2 -translate-y-1/2 text-ash" size={20} strokeWidth={1.5} />
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleSearchAdd()}
-                      placeholder="e.g. Attention Is All You Need" 
+                      placeholder="e.g. Attention Is All You Need"
                       autoFocus
                       className="w-full bg-transparent border-b border-ash py-4 pl-10 text-[20px] font-light text-ink-black placeholder:text-ash focus:outline-none focus:border-ink-black transition-colors mb-8 rounded-none"
                     />
@@ -191,22 +189,21 @@ export default function PaperIngestionModal({
               ) : (
                 <div>
                   {/* Drop Zone */}
-                  <div 
-                    className={`relative border border-dashed p-8 flex flex-col items-center justify-center mb-4 transition-all cursor-pointer ${
-                      isDragging ? "border-ink-black bg-ash/5 text-ink-black scale-[1.01]" : "border-ash text-graphite hover:border-ink-black hover:text-ink-black"
-                    }`}
+                  <div
+                    className={`relative border border-dashed p-8 flex flex-col items-center justify-center mb-4 transition-all cursor-pointer ${isDragging ? "border-ink-black bg-ash/5 text-ink-black scale-[1.01]" : "border-ash text-graphite hover:border-ink-black hover:text-ink-black"
+                      }`}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
                     onClick={() => fileInputRef.current?.click()}
                   >
-                    <input 
-                      type="file" 
-                      ref={fileInputRef} 
-                      onChange={handleFileChange} 
-                      accept="application/pdf" 
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      accept="application/pdf"
                       multiple
-                      className="hidden" 
+                      className="hidden"
                     />
                     <Upload size={28} strokeWidth={1} className="mb-3" />
                     <p className="text-[15px] font-light">Drag & drop PDFs here</p>
