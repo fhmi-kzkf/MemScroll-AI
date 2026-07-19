@@ -137,7 +137,7 @@ const TestimonialCards = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="flex-1 bg-candy-pink p-8 md:p-16 min-h-[60vh] flex flex-col justify-between"
       >
         <p className="text-[32px] md:text-[48px] lg:text-[56px] font-light leading-[1.05] text-[#b50d88] tracking-[-0.03em]">
@@ -152,7 +152,7 @@ const TestimonialCards = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="flex-1 bg-mint-wash p-8 md:p-16 min-h-[60vh] flex flex-col justify-between"
       >
         <p className="text-[32px] md:text-[48px] lg:text-[56px] font-light leading-[1.05] text-[#0d735a] tracking-[-0.03em]">
@@ -260,7 +260,7 @@ const ComplexFooter = () => {
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="w-full flex justify-center items-end leading-none overflow-hidden select-none px-4 pb-0"
       >
         <h1 className="text-[15vw] lg:text-[18vw] font-bold tracking-[-0.03em] text-bone-white whitespace-nowrap leading-[0.75]">

@@ -7,14 +7,14 @@ import { X } from "lucide-react";
 export default function MenuOverlay({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const menuVariants = {
     closed: { opacity: 0, y: "-100%" },
-    open: { opacity: 1, y: "0%", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
+    open: { opacity: 1, y: "0%", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } }
   };
 
   const linkVariants = {
     closed: { opacity: 0, y: 50 },
     open: (i: number) => ({
       opacity: 1, y: 0,
-      transition: { delay: 0.2 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+      transition: { delay: 0.2 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
     })
   };
 

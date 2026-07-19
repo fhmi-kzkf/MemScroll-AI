@@ -62,7 +62,7 @@ export default function NewProjectModal({
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="relative w-full max-w-[500px] bg-bone-white p-8 shadow-subtle border border-ash/30 rounded-none"
           >
             <button onClick={onClose} className="absolute top-4 right-4 p-2 text-graphite hover:text-ink-black transition-colors">

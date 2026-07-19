@@ -21,7 +21,7 @@ export default function ProjectCard({ title, description, imageSrc, accentVarian
     <div className="flex flex-col group cursor-pointer h-full">
       {imageSrc ? (
         <div className="w-full aspect-[4/3] relative mb-6 overflow-hidden border border-ash/20">
-          <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="w-full h-full relative">
+          <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }} className="w-full h-full relative">
             <Image src={imageSrc} alt={title} fill className="object-cover rounded-none" />
           </motion.div>
         </div>
