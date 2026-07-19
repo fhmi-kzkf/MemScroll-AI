@@ -1,14 +1,32 @@
-# MemscrollAI
+# MemScroll-AI
 
-MemscrollAI is an AI-powered research assistant designed to transform the way students and researchers consume academic literature. 
-Instead of re-reading the same foundational concepts across multiple papers, MemscrollAI builds a persistent memory graph of your reading history and generates adaptive, interactive "scrollytelling" narratives that focus only on what truly matters to you.
+> **Qwen AI Hackathon 2026 Submission**
+> 
+> **Track:** *[ISI TRACK HACKATHON ANDA DI SINI - misal: Educational AI / Productivity]*  
+> **Demo Video:** *[MASUKKAN LINK YOUTUBE/VIMEO VIDEO 3 MENIT ANDA DI SINI]*
 
-## Features
+## What is MemScroll-AI? (Features & Functionality)
 
-- **Adaptive Reader**: Upload a PDF and read it as an interactive web page. The AI detects concepts you've mastered and automatically condenses them.
-- **Persistent Memory Graph**: Every concept extracted is tracked in a database. The system remembers what you know and automatically archives low-importance data.
+MemScroll-AI is an AI-powered research assistant designed to transform the way students and researchers consume academic literature. Instead of re-reading the same foundational concepts across multiple papers, MemScroll-AI builds a persistent memory graph of your reading history and generates adaptive, interactive "scrollytelling" narratives that focus only on what truly matters to you.
+
+### Key Features:
+- **Adaptive Reader**: Upload a PDF and read it as an interactive web page. The AI detects concepts you've mastered and automatically condenses them, saving you hours of reading time.
+- **Persistent Memory Graph**: Every concept extracted is tracked in an SQLite database. The system remembers what you know (using vector embeddings) and automatically archives low-importance data.
 - **Conflict Resolution (Synthesis)**: Automatically cross-reference new claims against your historical reading list and write synthesis notes seamlessly.
-- **Scrollytelling Output**: Beautiful, magazine-style data visualization and narrative generation for methodology and findings, powered by the Qwen LLM.
+- **Scrollytelling Output**: Beautiful, magazine-style data visualization and narrative generation for methodology and findings, directly generated in HTML/CSS by the Qwen LLM.
+
+## Proof of Alibaba Cloud Deployment & Usage
+
+MemScroll-AI is actively deployed on Alibaba Cloud and leverages DashScope APIs for its core intelligence.
+
+1. **Alibaba Cloud ECS Deployment**: 
+   The FastAPI backend is deployed on an Alibaba Cloud ECS instance. You can interact with the live backend API here: `https://memscroll-api.duckdns.org/docs`
+2. **Qwen Models Used**:
+   - `qwen3.7-plus` for Concept Extraction & Complex Analysis
+   - `qwen3.6-flash` for Fast HTML/CSS Scrollytelling Generation
+   - `text-embedding-v4` for Semantic Vector Search
+3. **Code Proof**: 
+   Please see [`backend/pipeline.py`](https://github.com/fhmi-kzkf/MemScroll-AI/blob/main/backend/pipeline.py) which contains the explicit integration and HTTP calls to `https://dashscope-intl.aliyuncs.com`.
 
 ## Tech Stack
 
