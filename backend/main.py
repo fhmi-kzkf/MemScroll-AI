@@ -23,20 +23,11 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# CORS setup
-FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
-ALLOWED_ORIGINS = [
-    FRONTEND_URL,
-    "http://localhost:3000",
-    "https://mem-scroll-ai.vercel.app",
-    "https://memscrollai.vercel.app",
-]
-# Also allow all Vercel preview URLs (*.vercel.app)
+# CORS setup — origins filtered at Nginx level; FastAPI allows all
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_origin_regex=r"https://.*\.vercel\.app",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
