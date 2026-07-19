@@ -23,12 +23,17 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# CORS setup — origins filtered at Nginx level; FastAPI allows all
+# CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://mem-scroll-ai.vercel.app",
+        "https://memscrollai.vercel.app",
+        "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
