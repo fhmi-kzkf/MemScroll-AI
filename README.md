@@ -1,9 +1,7 @@
 # MemScroll-AI
 
 > **Qwen AI Hackathon 2026 Submission**
-> 
-> **Track:** *[ISI TRACK HACKATHON ANDA DI SINI - misal: Educational AI / Productivity]*  
-> **Demo Video:** *[MASUKKAN LINK YOUTUBE/VIMEO VIDEO 3 MENIT ANDA DI SINI]*
+
 
 ## What is MemScroll-AI? (Features & Functionality)
 
